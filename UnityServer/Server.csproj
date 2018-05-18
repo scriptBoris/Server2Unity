@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{7E459E41-1ACB-4062-A580-1D5E69086B8F}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>UnityServer</RootNamespace>
-    <AssemblyName>UnityServer</AssemblyName>
+    <RootNamespace>Server</RootNamespace>
+    <AssemblyName>Unity2Server</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

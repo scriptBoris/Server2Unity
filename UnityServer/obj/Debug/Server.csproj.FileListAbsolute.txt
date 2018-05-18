@@ -1,0 +1,7 @@
+C:\Users\1\source\repos\UnityServer\UnityServer\bin\Debug\Unity2Server.exe.config
+C:\Users\1\source\repos\UnityServer\UnityServer\bin\Debug\Unity2Server.exe
+C:\Users\1\source\repos\UnityServer\UnityServer\bin\Debug\Unity2Server.pdb
+C:\Users\1\source\repos\UnityServer\UnityServer\obj\Debug\Server.csprojResolveAssemblyReference.cache
+C:\Users\1\source\repos\UnityServer\UnityServer\obj\Debug\Server.csproj.CoreCompileInputs.cache
+C:\Users\1\source\repos\UnityServer\UnityServer\obj\Debug\Unity2Server.exe
+C:\Users\1\source\repos\UnityServer\UnityServer\obj\Debug\Unity2Server.pdb

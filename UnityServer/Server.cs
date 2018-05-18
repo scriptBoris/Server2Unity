@@ -11,43 +11,32 @@ namespace Server
 {
     public class Server
     {
-        private bool _run;
+        private string _url;
 
         #region private members 	
-        /// <summary> 	
-        /// TCPListener to listen for incomming TCP connection 	
-        /// requests. 	
-        /// </summary> 	
+        // TCPListener to listen for incomming TCP connection requests. 
         private TcpListener tcpListener;
-        /// <summary> 
-        /// Background thread for TcpServer workload. 	
-        /// </summary> 	
+        // Background thread for TcpServer workload. 	
         private Thread tcpListenerThread;
-        /// <summary> 	
-        /// Create handle to connected tcp client. 	
-        /// </summary> 	
+        // Create handle to connected tcp client. 	
         private TcpClient connectedTcpClient;
         #endregion
 
-        public Server()
+        public Server(string url)
         {
+            _url = url;
             tcpListenerThread = new Thread(new ThreadStart(ListenForIncommingRequests));
             tcpListenerThread.IsBackground = true;
             tcpListenerThread.Start();
         }
 
-        void Loop()
-        {
-            while (_run)
-            {
-                SendMessage();
-                Thread.Sleep(18);
-            }
-        }
+        //void Loop() // last name is Update
+        //{
+        //    SendMessage();
+        //    Thread.Sleep(18);
+        //}
 
-        /// <summary> 	
         /// Runs in background TcpServerThread; Handles incomming TcpClient requests 	
-        /// </summary> 	
         private void ListenForIncommingRequests()
         {
             try
@@ -55,6 +44,7 @@ namespace Server
                 // Create listener on localhost port 8052. 			
                 tcpListener = new TcpListener(IPAddress.Parse("127.0.0.1"), 8000);
                 tcpListener.Start();
+                Console.WriteLine(_url);
                 Byte[] bytes = new Byte[1024];
                 while (true)
                 {
@@ -65,13 +55,13 @@ namespace Server
                         {
                             int length;
                             // Read incomming stream into byte arrary. 						
-                            while ((length = stream.Read(bytes, 0, bytes.Length)) != 0)
+                            while ( (length = stream.Read(bytes, 0, bytes.Length) ) != 0)
                             {
                                 var incommingData = new byte[length];
                                 Array.Copy(bytes, 0, incommingData, 0, length);
                                 // Convert byte array to string message. 							
                                 string clientMessage = Encoding.ASCII.GetString(incommingData);
-                                Console.WriteLine("client message received as: " + clientMessage);
+                                Console.WriteLine($"Client message: {clientMessage}");
                             }
                         }
                     }
@@ -82,10 +72,9 @@ namespace Server
                 Console.Write("SocketException " + socketException.ToString());
             }
         }
-        /// <summary> 	
+
         /// Send message to client using socket connection. 	
-        /// </summary> 	
-        private void SendMessage()
+        public void SendMessage(string s)
         {
             if (connectedTcpClient == null)
             {
@@ -98,7 +87,7 @@ namespace Server
                 NetworkStream stream = connectedTcpClient.GetStream();
                 if (stream.CanWrite)
                 {
-                    string serverMessage = "This is a message from your server.";
+                    string serverMessage = s;
                     // Convert string message to byte array.                 
                     byte[] serverMessageAsByteArray = Encoding.ASCII.GetBytes(serverMessage);
                     // Write byte array to socketConnection stream.               
